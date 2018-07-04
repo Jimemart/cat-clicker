@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <vue-third-step/>
+    <router-view/>
   </div>
 </template>
 
@@ -11,6 +11,10 @@ export default {
     vueFirstStep: FirstStep,
     vueSecondStep: SecondStep,
     vueThirdStep: ThirdStep
+  },
+  beforeUpdate () {
+    this.$store.commit('cats/RESTORE_COUNTER')
+    
   }
 }
 </script>

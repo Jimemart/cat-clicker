@@ -1,24 +1,21 @@
 <template lang="html">
   <ul>
-    <vue-cat-list-element v-for="(elem, i) in list" :key="i" :cat="elem" @click="show(elem.name)"/>
+    <vue-cat-list-element v-for="(elem, i) in list" :key="i" :cat="elem" @click="select(elem.id)"/>
   </ul>
 </template>
 
 <script>
 import { CatListElement } from './components'
-import fiveCats from '../../mocks/five-cats.json'
 export default {
-  data () {
-    return {
-      list: fiveCats
-    }
+  props: {
+    list: { type: Array, required: true }
   },
   components: {
     vueCatListElement: CatListElement
   },
   methods: {
-    show (name) {
-      alert(name)
+    select (id) {
+      this.$emit('selected', id)
     }
   }
 }

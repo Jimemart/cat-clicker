@@ -1,7 +1,9 @@
 <template lang="html">
   <div>
-    <vue-cat-detail  v-for="(cat, i) in twoCats" :key="i" :cat="cat"/>
-    <vue-navigation/>
+    <vue-cat-detail  v-for="(cat, i) in twoCats" :key="i" :cat="cat" :local="true"/>
+    <vue-navigation
+    @next="$router.push('third-step')"
+    @prev="$router.push('first-step')"/>
   </div>
 </template>
 

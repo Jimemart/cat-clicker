@@ -1,7 +1,9 @@
 <template lang="html">
   <div>
-    <vue-cat-detail/>
-    <vue-navigation/>
+    <vue-cat-detail :counter="counter"/>
+    <vue-navigation
+    @next="$router.push('second-step')"
+    :prevDisabled="true"/>
   </div>
 
 </template>
@@ -13,6 +15,11 @@ export default {
   components: {
     vueCatDetail: CatDetail,
     vueNavigation: Navigation
+  },
+  computed: {
+    counter: {
+      get () { return this.$store.state.cats.counter }
+    }
   }
 }
 </script>

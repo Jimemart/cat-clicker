@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="flex">
     <vue-cat-image @clicked="addUp" :cat=cat />
-    <vue-cat-counter :counter=counter />
+    <vue-cat-counter :counter=catCounter />
   </div>
 </template>
 
@@ -9,13 +9,20 @@
 import { Catimage, CatCounter } from './components'
 
 export default {
-  data() {
+  data () {
     return {
-      counter: 0
+      dataCounter: this.counter
+    }
+  },
+  computed: {
+    catCounter: {
+      get () { return this.local ? this.dataCounter : this.counter }
     }
   },
   props: {
-    cat: {type: Object}
+    cat: {type: Object},
+    counter: { type: Number, default: 0 },
+    local: { type: Boolean, default: false }
   },
   components: {
     vueCatImage: Catimage,
@@ -23,7 +30,7 @@ export default {
   },
   methods: {
     addUp () {
-      this.counter ++
+      this.local ? this.dataCounter ++ : this.$store.commit('cats/ADD_ONE')
     }
   }
 }
